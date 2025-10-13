@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Home, User, Briefcase, Code, Mail } from "lucide-react";
 
 interface CircularNavProps {
@@ -15,19 +15,54 @@ const navItems = [
 ];
 
 const CircularNav = ({ activeSection, onNavigate }: CircularNavProps) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const navRef = useRef<HTMLDivElement>(null);
+  const closeTimeoutRef = useRef<NodeJS.Timeout>();
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleMouseEnter = () => {
+    clearTimeout(closeTimeoutRef.current);
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 2000); // 2 second delay before closing
+  };
+
+  const handleToggle = () => {
+    clearTimeout(closeTimeoutRef.current);
+    setIsOpen(!isOpen);
+  };
+
+  const handleItemClick = (section: string) => {
+    onNavigate(section);
+    setIsOpen(false);
+  };
   
   return (
     <nav 
-      className="fixed left-8 top-1/2 -translate-y-1/2 z-40"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      ref={navRef}
+      className="fixed left-8 top-1/2 -translate-y-1/2 md:left-8 md:top-1/2 md:-translate-y-1/2 max-md:left-auto max-md:right-4 max-md:top-4 max-md:translate-y-0 z-40"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <div className="relative">
         {navItems.map((item, index) => {
           const angle = (index * 72 - 90) * (Math.PI / 180); // 360/5 = 72 degrees
-          const radius = isHovered ? 80 : 0;
+          const radius = isOpen ? 120 : 0;
           const x = Math.cos(angle) * radius;
           const y = Math.sin(angle) * radius;
           const isItemHovered = hoveredItem === item.id;
@@ -35,7 +70,7 @@ const CircularNav = ({ activeSection, onNavigate }: CircularNavProps) => {
           return (
             <div key={item.id} className="absolute top-0 left-0">
               <button
-                onClick={() => onNavigate(item.id)}
+                onClick={() => handleItemClick(item.id)}
                 onMouseEnter={() => setHoveredItem(item.id)}
                 onMouseLeave={() => setHoveredItem(null)}
                 className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 ${
@@ -44,7 +79,7 @@ const CircularNav = ({ activeSection, onNavigate }: CircularNavProps) => {
                     : "bg-card/80 backdrop-blur-glass border border-[var(--glass-border)] text-foreground hover:bg-primary hover:text-primary-foreground hover:shadow-elegant"
                 }`}
                 style={{
-                  transform: `translate(${x}px, ${y}px) ${isItemHovered && isHovered ? 'scale(1.2)' : 'scale(1)'}`,
+                  transform: `translate(${x}px, ${y}px) ${isItemHovered && isOpen ? 'scale(1.2)' : 'scale(1)'}`,
                   zIndex: isItemHovered ? 10 : 1,
                 }}
                 title={item.label}
@@ -54,8 +89,8 @@ const CircularNav = ({ activeSection, onNavigate }: CircularNavProps) => {
               
               {/* Hover label */}
               <div 
-                className={`absolute left-16 top-1/2 -translate-y-1/2 whitespace-nowrap transition-all duration-300 pointer-events-none ${
-                  isItemHovered && isHovered
+                className={`absolute left-16 top-1/2 -translate-y-1/2 whitespace-nowrap transition-all duration-300 pointer-events-none max-md:left-auto max-md:right-16 ${
+                  isItemHovered && isOpen
                     ? 'opacity-100 translate-x-0'
                     : 'opacity-0 -translate-x-2'
                 }`}
@@ -71,10 +106,13 @@ const CircularNav = ({ activeSection, onNavigate }: CircularNavProps) => {
           );
         })}
         
-        {/* Center dot */}
-        <div className="absolute top-0 left-0 w-12 h-12 rounded-full bg-card/80 backdrop-blur-glass border-2 border-primary flex items-center justify-center pointer-events-none">
+        {/* Center dot - clickable */}
+        <button 
+          onClick={handleToggle}
+          className="absolute top-0 left-0 w-12 h-12 rounded-full bg-card/80 backdrop-blur-glass border-2 border-primary flex items-center justify-center hover:bg-card transition-all cursor-pointer"
+        >
           <div className="w-3 h-3 rounded-full bg-gradient-primary animate-pulse" />
-        </div>
+        </button>
       </div>
     </nav>
   );
