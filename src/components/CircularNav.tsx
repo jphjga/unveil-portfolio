@@ -55,7 +55,7 @@ const CircularNav = ({ activeSection, onNavigate }: CircularNavProps) => {
   return (
     <nav 
       ref={navRef}
-      className="fixed left-8 top-1/2 -translate-y-1/2 md:left-8 md:top-1/2 md:-translate-y-1/2 max-md:left-4 max-md:bottom-4 max-md:top-auto max-md:translate-y-0 z-40"
+      className="fixed left-8 top-1/2 -translate-y-1/2 md:left-8 md:top-1/2 md:-translate-y-1/2 max-md:left-24 max-md:top-24 max-md:translate-y-0 z-40"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -65,9 +65,9 @@ const CircularNav = ({ activeSection, onNavigate }: CircularNavProps) => {
           const desktopAngle = ((index * 45) - 90) * (Math.PI / 180); // -90°, -45°, 0°, 45°, 90°
           const desktopRadius = isOpen ? 90 : 0;
           
-          // Mobile: Semi-circle upward and right (from -180 to 0 degrees)
-          const mobileAngle = ((index * 45) - 180) * (Math.PI / 180); // -180°, -135°, -90°, -45°, 0°
-          const mobileRadius = isOpen ? 85 : 0;
+          // Mobile: Semi-circle downward and rightward (from 0 to 180 degrees)
+          const mobileAngle = (index * 45) * (Math.PI / 180); // 0°, 45°, 90°, 135°, 180°
+          const mobileRadius = isOpen ? 70 : 0;
           
           const x = Math.cos(desktopAngle) * desktopRadius;
           const y = Math.sin(desktopAngle) * desktopRadius;
