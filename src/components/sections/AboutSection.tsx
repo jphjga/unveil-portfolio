@@ -18,11 +18,11 @@ const AboutSection = () => {
             </p>
             <div className="flex gap-4 pt-4">
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary">5+</div>
+                <div className="text-3xl font-bold text-primary">3+</div>
                 <div className="text-sm text-muted-foreground">Years Experience</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-secondary">50+</div>
+                <div className="text-3xl font-bold text-secondary">20+</div>
                 <div className="text-sm text-muted-foreground">Projects Completed</div>
               </div>
               <div className="text-center">
