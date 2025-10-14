@@ -55,16 +55,20 @@ const CircularNav = ({ activeSection, onNavigate }: CircularNavProps) => {
   return (
     <nav 
       ref={navRef}
-      className="fixed left-8 top-1/2 -translate-y-1/2 md:left-8 md:top-1/2 md:-translate-y-1/2 max-md:left-auto max-md:right-4 max-md:top-4 max-md:translate-y-0 z-40"
+      className="fixed left-8 top-1/2 -translate-y-1/2 md:left-8 md:top-1/2 md:-translate-y-1/2 max-md:left-4 max-md:top-4 max-md:translate-y-0 z-40"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <div className="relative">
         {navItems.map((item, index) => {
-          const angle = (index * 72 - 90) * (Math.PI / 180); // 360/5 = 72 degrees
-          const radius = isOpen ? 120 : 0;
-          const x = Math.cos(angle) * radius;
-          const y = Math.sin(angle) * radius;
+          // Desktop: Semi-circle to the right (180 degrees from -90 to 90)
+          // Mobile: Vertical stack below
+          const desktopAngle = ((index * 45) - 90) * (Math.PI / 180); // -90°, -45°, 0°, 45°, 90°
+          const desktopRadius = isOpen ? 90 : 0;
+          const mobileOffset = isOpen ? (index + 1) * 60 : 0;
+          
+          const x = Math.cos(desktopAngle) * desktopRadius;
+          const y = Math.sin(desktopAngle) * desktopRadius;
           const isItemHovered = hoveredItem === item.id;
           
           return (
@@ -79,7 +83,7 @@ const CircularNav = ({ activeSection, onNavigate }: CircularNavProps) => {
                     : "bg-card/80 backdrop-blur-glass border border-[var(--glass-border)] text-foreground hover:bg-primary hover:text-primary-foreground hover:shadow-elegant"
                 }`}
                 style={{
-                  transform: `translate(${x}px, ${y}px) ${isItemHovered && isOpen ? 'scale(1.2)' : 'scale(1)'}`,
+                  transform: `translate(${x}px, ${y}px) ${isItemHovered && isOpen ? 'scale(1.15)' : 'scale(1)'}`,
                   zIndex: isItemHovered ? 10 : 1,
                 }}
                 title={item.label}
@@ -87,15 +91,31 @@ const CircularNav = ({ activeSection, onNavigate }: CircularNavProps) => {
                 <item.icon className="w-5 h-5" />
               </button>
               
-              {/* Hover label */}
+              {/* Hover label - Desktop only, positioned to the right */}
               <div 
-                className={`absolute left-16 top-1/2 -translate-y-1/2 whitespace-nowrap transition-all duration-300 pointer-events-none max-md:left-auto max-md:right-16 ${
+                className={`absolute left-16 top-1/2 -translate-y-1/2 whitespace-nowrap transition-all duration-300 pointer-events-none hidden md:block ${
                   isItemHovered && isOpen
                     ? 'opacity-100 translate-x-0'
                     : 'opacity-0 -translate-x-2'
                 }`}
                 style={{
                   transform: `translate(${x + 64}px, ${y - 24}px)`,
+                }}
+              >
+                <span className="px-3 py-1.5 bg-card/95 backdrop-blur-glass border border-[var(--glass-border)] rounded-lg text-sm font-medium text-foreground shadow-elegant">
+                  {item.label}
+                </span>
+              </div>
+              
+              {/* Mobile label - Below icon */}
+              <div 
+                className={`absolute top-14 left-1/2 -translate-x-1/2 whitespace-nowrap transition-all duration-300 pointer-events-none md:hidden ${
+                  isItemHovered && isOpen
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 -translate-y-2'
+                }`}
+                style={{
+                  transform: `translate(-24px, ${mobileOffset + 48}px)`,
                 }}
               >
                 <span className="px-3 py-1.5 bg-card/95 backdrop-blur-glass border border-[var(--glass-border)] rounded-lg text-sm font-medium text-foreground shadow-elegant">
