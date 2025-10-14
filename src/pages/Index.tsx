@@ -93,7 +93,7 @@ const Index = () => {
           {/* Footer */}
           <footer className="relative z-10 py-8 text-center border-t border-border">
             <p className="text-muted-foreground">
-              © 2024 Your Name. Built with React & Tailwind CSS
+              © 2024 JPJGA. Built with React & Tailwind CSS
             </p>
           </footer>
         </>
