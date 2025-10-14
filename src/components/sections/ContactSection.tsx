@@ -14,13 +14,13 @@ const ContactSection = () => {
         
         <div className="flex justify-center gap-6 mb-12">
           <a
-            href="mailto:your.email@example.com"
+            href="mailto:y0njengajoseph+portfolio@gmail.com"
             className="w-16 h-16 rounded-full bg-card/50 backdrop-blur-glass border border-[var(--glass-border)] flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-500 hover:scale-110"
           >
             <Mail className="w-6 h-6" />
           </a>
           <a
-            href="https://github.com/yourusername"
+            href="https://github.com/jphjga"
             target="_blank"
             rel="noopener noreferrer"
             className="w-16 h-16 rounded-full bg-card/50 backdrop-blur-glass border border-[var(--glass-border)] flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-500 hover:scale-110"
@@ -28,7 +28,7 @@ const ContactSection = () => {
             <Github className="w-6 h-6" />
           </a>
           <a
-            href="https://linkedin.com/in/yourusername"
+            href="https://linkedin.com/in/joseph-jp"
             target="_blank"
             rel="noopener noreferrer"
             className="w-16 h-16 rounded-full bg-card/50 backdrop-blur-glass border border-[var(--glass-border)] flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-500 hover:scale-110"
@@ -36,7 +36,7 @@ const ContactSection = () => {
             <Linkedin className="w-6 h-6" />
           </a>
           <a
-            href="https://twitter.com/yourusername"
+            href="https://twitter.com/JPHJGA"
             target="_blank"
             rel="noopener noreferrer"
             className="w-16 h-16 rounded-full bg-card/50 backdrop-blur-glass border border-[var(--glass-border)] flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-500 hover:scale-110"

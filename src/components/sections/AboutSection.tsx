@@ -34,7 +34,7 @@ const AboutSection = () => {
           <div className="flex justify-center">
             <div className="w-80 h-80 rounded-full bg-gradient-primary p-1">
               <div className="w-full h-full rounded-full bg-card flex items-center justify-center text-muted-foreground">
-                [Your Photo Here]
+              <img src="src/assets/profile-pic.jpg" alt="Joseph" className="w-full h-full object-cover rounded-full" />
               </div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 const skills = [
-  { category: "Frontend", items: ["React", "TypeScript", "Tailwind CSS", "Next.js", "Vue.js"] },
-  { category: "Backend", items: ["Node.js", "Python", "PostgreSQL", "MongoDB", "REST APIs"] },
-  { category: "Tools", items: ["Git", "Docker", "Figma", "VS Code", "Linux"] },
+  { category: "Frontend", items: ["HTML","CSS","Javasript","PHP","React","Bootstrap","TypeScript", "Tailwind CSS", "Next.js", "Vue.js"] },
+  { category: "Backend", items: [".Net Framework","C#","Kotlin","Node.js", "Python", "PostgreSQL", "MongoDB", "REST APIs"] },
+  { category: "Tools", items: ["Git", "VS Code", "Postman", "Android Studio", "microsoft Visual Studio", "wordpress", "Figma", "Linux"] },
   { category: "Soft Skills", items: ["Problem Solving", "Team Leadership", "Communication", "Agile", "Creativity"] },
 ];
 

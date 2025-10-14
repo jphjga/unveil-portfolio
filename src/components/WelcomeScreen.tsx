@@ -10,10 +10,10 @@ const WelcomeScreen = ({ onEnter }: WelcomeScreenProps) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-secondary">
       <div className="text-center px-6 animate-fade-in-up">
         <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-          Hello, I'm [Your Name]
+          Hello, I'm Joseph
         </h1>
         <p className="text-xl md:text-2xl text-muted-foreground mb-12 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-          Creative Developer • Designer • Problem Solver
+          Software Developer • Web Developer • Problem Solver
         </p>
         
         <Button 
