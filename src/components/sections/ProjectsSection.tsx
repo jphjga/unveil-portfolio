@@ -7,9 +7,9 @@ const projects = [
     title: "Pharmacy Inventory Management System",
     description: "A comprehensive inventory management system designed to streamline pharmacy operations, track medication stock, and manage supplies efficiently.",
     tech: ["React", "TypeScript", "Tailwind CSS", "Vite"],
-    link: "https://joseph-pharmacare.netlify.app/auth",
+    link: "https://joseph-pharmacare.netlify.app/",
     github: "https://github.com/jphjga/pill-guardian-plus",
-    image: "/dashboard.png", // Image from public folder
+    image: "https://joseph-pharmacare.netlify.app//dashboard.png",
   },
   {
     title: "My Reserve",
@@ -17,7 +17,7 @@ const projects = [
     tech: ["Next.js", "shadcn-ui", "Vercel"],
     link: "https://my-reserve-kenya.vercel.app/",
     github: "https://github.com/jphjga/my-reserve-kenya",
-    image: "/myreserve.png", // Image from public folder
+    image: "https://my-reserve-kenya.vercel.app//myreserve.png", 
   },
   // Add more projects here in the future
 ];
