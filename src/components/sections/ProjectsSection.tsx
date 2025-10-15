@@ -4,47 +4,22 @@ import { Button } from "@/components/ui/button";
 
 const projects = [
   {
-    title: "E-Commerce Platform",
-    description: "Full-stack e-commerce solution with real-time inventory management, secure payment processing, and advanced analytics dashboard.",
-    tech: ["React", "Node.js", "MongoDB", "Stripe"],
-    link: "#",
-    github: "#",
+    title: "Pharmacy Inventory Management System",
+    description: "A comprehensive inventory management system designed to streamline pharmacy operations, track medication stock, and manage supplies efficiently.",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Vite"],
+    link: "https://joseph-pharmacare.netlify.app/auth",
+    github: "https://github.com/jphjga/pill-guardian-plus",
+    image: "/dashboard.png", // Image from public folder
   },
   {
-    title: "AI Content Generator",
-    description: "Machine learning-powered content creation tool that generates high-quality marketing copy and social media posts.",
-    tech: ["Python", "TensorFlow", "React", "FastAPI"],
-    link: "#",
-    github: "#",
+    title: "My Reserve",
+    description: "A versatile reservation platform for businesses like hotels, restaurants, and clubs, allowing customers to seamlessly book services and purchase tickets online.",
+    tech: ["Next.js", "shadcn-ui", "Vercel"],
+    link: "https://my-reserve-kenya.vercel.app/",
+    github: "https://github.com/jphjga/my-reserve-kenya",
+    image: "/myreserve.png", // Image from public folder
   },
-  {
-    title: "Task Management App",
-    description: "Collaborative project management platform with real-time updates, team chat, and productivity analytics.",
-    tech: ["Next.js", "PostgreSQL", "WebSocket", "Tailwind"],
-    link: "#",
-    github: "#",
-  },
-  {
-    title: "Weather Forecast Dashboard",
-    description: "Interactive weather application with beautiful visualizations, location-based forecasts, and severe weather alerts.",
-    tech: ["Vue.js", "OpenWeather API", "Chart.js"],
-    link: "#",
-    github: "#",
-  },
-  {
-    title: "Social Media Analytics",
-    description: "Comprehensive analytics platform for tracking social media performance across multiple channels with AI insights.",
-    tech: ["React", "D3.js", "Express", "Redis"],
-    link: "#",
-    github: "#",
-  },
-  {
-    title: "Portfolio Builder",
-    description: "Drag-and-drop portfolio website builder with customizable templates and one-click deployment.",
-    tech: ["TypeScript", "React", "Supabase", "Vercel"],
-    link: "#",
-    github: "#",
-  },
+  // Add more projects here in the future
 ];
 
 const ProjectsSection = () => {
@@ -67,11 +42,13 @@ const ProjectsSection = () => {
               className="group bg-card/50 backdrop-blur-glass border-[var(--glass-border)] overflow-hidden hover:bg-card/80 transition-all duration-500 hover:scale-105 hover:shadow-elegant"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              {/* Project Image Placeholder */}
+              {/* Project Image */}
               <div className="relative aspect-video bg-gradient-secondary overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/20 to-primary-glow/20 flex items-center justify-center">
-                  <span className="text-4xl font-bold text-primary/20">{index + 1}</span>
-                </div>
+                <img
+                  src={project.image}
+                  alt={`Screenshot of ${project.title}`}
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                />
                 <div className="absolute inset-0 bg-background/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-3">
                   <Button
                     size="sm"
