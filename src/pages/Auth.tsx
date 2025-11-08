@@ -14,7 +14,6 @@ const authSchema = z.object({
 });
 
 const Auth = () => {
-  const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -25,14 +24,14 @@ const Auth = () => {
     // Check if user is already logged in
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
-        navigate("/");
+        navigate("/admin/dashboard");
       }
     });
 
     // Listen for auth state changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (session) {
-        navigate("/");
+        navigate("/admin/dashboard");
       }
     });
 
@@ -47,61 +46,30 @@ const Auth = () => {
       // Validate input
       const validated = authSchema.parse({ email, password });
 
-      if (isLogin) {
-        const { error } = await supabase.auth.signInWithPassword({
-          email: validated.email,
-          password: validated.password,
-        });
+      const { error } = await supabase.auth.signInWithPassword({
+        email: validated.email,
+        password: validated.password,
+      });
 
-        if (error) {
-          if (error.message.includes("Invalid login credentials")) {
-            toast({
-              title: "Login failed",
-              description: "Invalid email or password. Please try again.",
-              variant: "destructive",
-            });
-          } else {
-            toast({
-              title: "Login failed",
-              description: error.message,
-              variant: "destructive",
-            });
-          }
+      if (error) {
+        if (error.message.includes("Invalid login credentials")) {
+          toast({
+            title: "Login failed",
+            description: "Invalid email or password. Please try again.",
+            variant: "destructive",
+          });
         } else {
           toast({
-            title: "Welcome back!",
-            description: "You've successfully logged in.",
+            title: "Login failed",
+            description: error.message,
+            variant: "destructive",
           });
         }
       } else {
-        const { error } = await supabase.auth.signUp({
-          email: validated.email,
-          password: validated.password,
-          options: {
-            emailRedirectTo: `${window.location.origin}/`,
-          },
+        toast({
+          title: "Welcome back!",
+          description: "You've successfully logged in.",
         });
-
-        if (error) {
-          if (error.message.includes("User already registered")) {
-            toast({
-              title: "Signup failed",
-              description: "This email is already registered. Please login instead.",
-              variant: "destructive",
-            });
-          } else {
-            toast({
-              title: "Signup failed",
-              description: error.message,
-              variant: "destructive",
-            });
-          }
-        } else {
-          toast({
-            title: "Account created!",
-            description: "You've successfully signed up and are now logged in.",
-          });
-        }
       }
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -142,10 +110,10 @@ const Auth = () => {
         <div className="bg-card/80 backdrop-blur-xl border border-border rounded-2xl p-8 shadow-2xl">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">
-              {isLogin ? "Welcome Back" : "Create Account"}
+              Admin Login
             </h1>
             <p className="text-muted-foreground">
-              {isLogin ? "Sign in to access the admin dashboard" : "Sign up to get started"}
+              Sign in to access the admin dashboard
             </p>
           </div>
 
@@ -183,20 +151,9 @@ const Auth = () => {
               className="w-full bg-gradient-primary hover:opacity-90 transition-opacity"
               disabled={loading}
             >
-              {loading ? "Please wait..." : isLogin ? "Sign In" : "Sign Up"}
+              {loading ? "Please wait..." : "Sign In"}
             </Button>
           </form>
-
-          <div className="mt-6 text-center">
-            <button
-              type="button"
-              onClick={() => setIsLogin(!isLogin)}
-              className="text-primary hover:text-primary/80 transition-colors"
-              disabled={loading}
-            >
-              {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
-            </button>
-          </div>
 
           <div className="mt-6 pt-6 border-t border-border text-center">
             <button
