@@ -5,8 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const ContactSection = () => {
+  const { ref, isVisible } = useScrollAnimation();
   const { toast } = useToast();
   const [contactInfo, setContactInfo] = useState({
     email: "y0njengajoseph+portfolio@gmail.com",
@@ -63,7 +65,13 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20">
+    <section 
+      ref={ref}
+      id="contact" 
+      className={`min-h-screen flex items-center justify-center px-6 py-20 transition-all duration-1000 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+      }`}
+    >
       <div className="max-w-4xl w-full text-center">
         <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
           Let's Connect
