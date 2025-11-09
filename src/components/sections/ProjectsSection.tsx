@@ -1,28 +1,36 @@
+import { useEffect, useState } from "react";
 import { ExternalLink, Github } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
 
-const projects = [
-  {
-    title: "Pharmacy Inventory Management System",
-    description: "A comprehensive inventory management system designed to streamline pharmacy operations, track medication stock, and manage supplies efficiently.",
-    tech: ["React", "TypeScript", "Tailwind CSS", "Vite"],
-    link: "https://joseph-pharmacare.netlify.app/",
-    github: "https://github.com/jphjga/pill-guardian-plus",
-    image: "https://joseph-pharmacare.netlify.app//dashboard.png",
-  },
-  {
-    title: "My Reserve",
-    description: "A versatile reservation platform for businesses like hotels, restaurants, and clubs, allowing customers to seamlessly book services and purchase tickets online.",
-    tech: ["Next.js", "shadcn-ui", "Vercel"],
-    link: "https://my-reserve-kenya.vercel.app/",
-    github: "https://github.com/jphjga/my-reserve-kenya",
-    image: "https://my-reserve-kenya.vercel.app//myreserve.png", 
-  },
-  // Add more projects here in the future
-];
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  tech_stack: string[];
+  link?: string;
+  github_link?: string;
+  image_url?: string;
+}
 
 const ProjectsSection = () => {
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const { data } = await supabase
+        .from("projects")
+        .select("*")
+        .eq("is_published", true)
+        .order("display_order", { ascending: true });
+      if (data) {
+        setProjects(data);
+      }
+    };
+    fetchProjects();
+  }, []);
+
   return (
     <section id="projects" className="min-h-screen flex items-center justify-center px-6 py-20">
       <div className="max-w-7xl w-full">
@@ -44,34 +52,44 @@ const ProjectsSection = () => {
             >
               {/* Project Image */}
               <div className="relative aspect-video bg-gradient-secondary overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={`Screenshot of ${project.title}`}
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                />
+                {project.image_url ? (
+                  <img
+                    src={project.image_url}
+                    alt={`Screenshot of ${project.title}`}
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+                    No image
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-background/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-3">
-                  <Button
-                    size="sm"
-                    variant="secondary"
-                    className="gap-2"
-                    asChild
-                  >
-                    <a href={project.link} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="w-4 h-4" />
-                      View
-                    </a>
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="gap-2"
-                    asChild
-                  >
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
-                      <Github className="w-4 h-4" />
-                      Code
-                    </a>
-                  </Button>
+                  {project.link && (
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      className="gap-2"
+                      asChild
+                    >
+                      <a href={project.link} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="w-4 h-4" />
+                        View
+                      </a>
+                    </Button>
+                  )}
+                  {project.github_link && (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="gap-2"
+                      asChild
+                    >
+                      <a href={project.github_link} target="_blank" rel="noopener noreferrer">
+                        <Github className="w-4 h-4" />
+                        Code
+                      </a>
+                    </Button>
+                  )}
                 </div>
               </div>
 
@@ -86,7 +104,7 @@ const ProjectsSection = () => {
                 
                 {/* Tech Stack */}
                 <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech, i) => (
+                  {project.tech_stack.map((tech, i) => (
                     <span
                       key={i}
                       className="text-xs px-3 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors"

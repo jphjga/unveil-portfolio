@@ -1,11 +1,30 @@
-const skills = [
-  { category: "Frontend", items: ["HTML","CSS","Javasript","PHP","React","Bootstrap","TypeScript", "Tailwind CSS", "Next.js", "Vue.js"] },
-  { category: "Backend", items: [".Net Framework","C#","Kotlin","Node.js", "Python", "PostgreSQL", "MongoDB", "REST APIs"] },
-  { category: "Tools", items: ["Git", "VS Code", "Postman", "Android Studio", "microsoft Visual Studio", "wordpress", "Figma", "Linux"] },
-  { category: "Soft Skills", items: ["Problem Solving", "Team Leadership", "Communication", "Agile", "Creativity"] },
-];
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+
+interface Skill {
+  category: string;
+  items: string[];
+}
 
 const SkillsSection = () => {
+  const [skills, setSkills] = useState<Skill[]>([]);
+
+  useEffect(() => {
+    const fetchSkills = async () => {
+      const { data } = await supabase
+        .from("skills")
+        .select("*")
+        .order("display_order", { ascending: true });
+      if (data) {
+        setSkills(data.map(skill => ({
+          category: skill.category,
+          items: skill.items,
+        })));
+      }
+    };
+    fetchSkills();
+  }, []);
+
   return (
     <section id="skills" className="min-h-screen flex items-center justify-center px-6 py-20">
       <div className="max-w-6xl w-full">
