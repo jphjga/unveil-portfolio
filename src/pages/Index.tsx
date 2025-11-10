@@ -6,6 +6,7 @@ import AboutSection from "@/components/sections/AboutSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import SkillsSection from "@/components/sections/SkillsSection";
 import ContactSection from "@/components/sections/ContactSection";
+import AnimationToggle from "@/components/AnimationToggle";
 import portfolioBg from "@/assets/portfolio-bg.jpg";
 
 const Index = () => {
@@ -81,6 +82,7 @@ const Index = () => {
       {!showWelcome && (
         <>
           <CircularNav activeSection={activeSection} onNavigate={handleNavigate} />
+          <AnimationToggle />
           
           <div className="relative z-10">
             <HeroSection />
