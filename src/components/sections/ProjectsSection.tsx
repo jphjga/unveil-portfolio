@@ -37,16 +37,10 @@ const ProjectsSection = () => {
     <section 
       ref={ref}
       id="projects" 
-      className={`min-h-screen flex items-center justify-center px-6 py-20 transition-opacity duration-700 ease-out ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}
-      style={{
-        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-        transition: 'opacity 0.7s ease-out, transform 0.7s ease-out'
-      }}
+      className="min-h-screen flex items-center justify-center px-6 py-20"
     >
       <div className="max-w-7xl w-full">
-        <div className="text-center mb-16 animate-fade-in">
+        <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
             Featured Projects
           </h2>
@@ -59,8 +53,7 @@ const ProjectsSection = () => {
           {projects.map((project, index) => (
             <Card
               key={index}
-              className="group bg-card/50 backdrop-blur-glass border-[var(--glass-border)] overflow-hidden hover:bg-card/80 transition-colors duration-300"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="group bg-card/50 border-[var(--glass-border)] overflow-hidden"
             >
               {/* Project Image */}
               <div className="relative aspect-video bg-gradient-secondary overflow-hidden">
@@ -68,14 +61,14 @@ const ProjectsSection = () => {
                   <img
                     src={project.image_url}
                     alt={`Screenshot of ${project.title}`}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover object-top"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-muted-foreground">
                     No image
                   </div>
                 )}
-                <div className="absolute inset-0 bg-background/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-3">
+                <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-3">
                   {project.link && (
                     <Button
                       size="sm"
@@ -107,7 +100,7 @@ const ProjectsSection = () => {
 
               {/* Project Content */}
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
+                <h3 className="text-xl font-bold mb-3">
                   {project.title}
                 </h3>
                 <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
@@ -119,7 +112,7 @@ const ProjectsSection = () => {
                   {project.tech_stack.map((tech, i) => (
                     <span
                       key={i}
-                      className="text-xs px-3 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors"
+                      className="text-xs px-3 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20"
                     >
                       {tech}
                     </span>

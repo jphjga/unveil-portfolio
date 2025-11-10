@@ -28,15 +28,9 @@ const HeroSection = () => {
     <section 
       ref={ref}
       id="hero" 
-      className={`min-h-screen flex items-center justify-center px-6 transition-opacity duration-700 ease-out ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}
-      style={{
-        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-        transition: 'opacity 0.7s ease-out, transform 0.7s ease-out'
-      }}
+      className="min-h-screen flex items-center justify-center px-6"
     >
-      <div className="max-w-4xl text-center animate-fade-in-up">
+      <div className="max-w-4xl text-center">
         <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-accent bg-clip-text text-transparent">
           {content.title}
         </h2>
@@ -47,7 +41,7 @@ const HeroSection = () => {
           {content.techTags.map((tag, index) => (
             <div
               key={index}
-              className="px-6 py-3 rounded-full bg-card/50 backdrop-blur-glass border border-[var(--glass-border)]"
+              className="px-6 py-3 rounded-full bg-card/50 border border-[var(--glass-border)]"
             >
               <span className="text-foreground">{tag}</span>
             </div>
