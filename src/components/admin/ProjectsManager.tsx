@@ -9,7 +9,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Loader2, Plus, Pencil, Trash2, X } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
-import ImageUpload from "./ImageUpload";
 
 interface Project {
   id: string;
@@ -221,11 +220,12 @@ export const ProjectsManager = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Project Image</Label>
-                  <ImageUpload
-                    currentImageUrl={imageUrl}
-                    onImageUploaded={setImageUrl}
-                    folder="projects"
+                  <Label htmlFor="proj-img">Image URL</Label>
+                  <Input
+                    id="proj-img"
+                    value={imageUrl}
+                    onChange={(e) => setImageUrl(e.target.value)}
+                    placeholder="https://..."
                   />
                 </div>
 
