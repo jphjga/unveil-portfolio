@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const AboutSection = () => {
+  const { ref, isVisible } = useScrollAnimation();
   const [content, setContent] = useState({
     description1: "I'm a passionate developer and designer focused on creating meaningful digital experiences. With a keen eye for detail and a love for clean code, I bring ideas to life through innovative solutions.",
     description2: "When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community.",
@@ -29,7 +31,13 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <section id="about" className="min-h-screen flex items-center justify-center px-6 py-20">
+    <section 
+      ref={ref}
+      id="about" 
+      className={`min-h-screen flex items-center justify-center px-6 py-20 transition-all duration-1000 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+      }`}
+    >
       <div className="max-w-4xl">
         <h2 className="text-4xl md:text-6xl font-bold mb-12 bg-gradient-primary bg-clip-text text-transparent">
           About Me
