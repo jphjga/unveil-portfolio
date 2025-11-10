@@ -37,9 +37,13 @@ const ProjectsSection = () => {
     <section 
       ref={ref}
       id="projects" 
-      className={`min-h-screen flex items-center justify-center px-6 py-20 transition-all duration-1000 ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+      className={`min-h-screen flex items-center justify-center px-6 py-20 transition-opacity duration-700 ease-out ${
+        isVisible ? "opacity-100" : "opacity-0"
       }`}
+      style={{
+        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+        transition: 'opacity 0.7s ease-out, transform 0.7s ease-out'
+      }}
     >
       <div className="max-w-7xl w-full">
         <div className="text-center mb-16 animate-fade-in">
@@ -55,7 +59,7 @@ const ProjectsSection = () => {
           {projects.map((project, index) => (
             <Card
               key={index}
-              className="group bg-card/50 backdrop-blur-glass border-[var(--glass-border)] overflow-hidden hover:bg-card/80 transition-all duration-500 hover:scale-105 hover:shadow-elegant"
+              className="group bg-card/50 backdrop-blur-glass border-[var(--glass-border)] overflow-hidden hover:bg-card/80 transition-colors duration-300"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Project Image */}

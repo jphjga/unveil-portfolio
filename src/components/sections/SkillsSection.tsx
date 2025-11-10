@@ -31,9 +31,13 @@ const SkillsSection = () => {
     <section 
       ref={ref}
       id="skills" 
-      className={`min-h-screen flex items-center justify-center px-6 py-20 transition-all duration-1000 ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+      className={`min-h-screen flex items-center justify-center px-6 py-20 transition-opacity duration-700 ease-out ${
+        isVisible ? "opacity-100" : "opacity-0"
       }`}
+      style={{
+        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+        transition: 'opacity 0.7s ease-out, transform 0.7s ease-out'
+      }}
     >
       <div className="max-w-6xl w-full">
         <h2 className="text-4xl md:text-6xl font-bold mb-12 bg-gradient-primary bg-clip-text text-transparent">
@@ -43,7 +47,7 @@ const SkillsSection = () => {
           {skills.map((skillGroup, index) => (
             <div
               key={index}
-              className="bg-card/50 backdrop-blur-glass border border-[var(--glass-border)] p-6 rounded-lg hover:bg-card/80 transition-all duration-500"
+              className="bg-card/50 backdrop-blur-glass border border-[var(--glass-border)] p-6 rounded-lg hover:bg-card/80 transition-colors duration-300"
             >
               <h3 className="text-2xl font-bold mb-4 text-primary">
                 {skillGroup.category}

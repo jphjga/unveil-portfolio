@@ -54,7 +54,7 @@ export default {
         'gradient-accent': 'var(--gradient-accent)',
       },
       backdropBlur: {
-        glass: '20px',
+        glass: '8px',
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -104,10 +104,10 @@ export default {
         },
       },
       animation: {
-        "fade-in-up": "fade-in-up 0.6s ease-out",
-        "fade-in": "fade-in 0.8s ease-out",
-        "slide-up": "slide-up 1s cubic-bezier(0.4, 0, 0.2, 1)",
-        "scale-in": "scale-in 0.5s ease-out",
+        "fade-in-up": "fade-in-up 0.4s ease-out",
+        "fade-in": "fade-in 0.5s ease-out",
+        "slide-up": "slide-up 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+        "scale-in": "scale-in 0.3s ease-out",
         "float": "float 3s ease-in-out infinite",
       },
     },
