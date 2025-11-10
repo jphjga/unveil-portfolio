@@ -20,7 +20,7 @@ const WelcomeScreen = ({ onEnter }: WelcomeScreenProps) => {
           onClick={onEnter}
           variant="outline"
           size="lg"
-          className="group bg-card/50 backdrop-blur-glass border-[var(--glass-border)] hover:bg-primary hover:text-primary-foreground transition-all duration-500 animate-fade-in-up"
+          className="group bg-card/50 backdrop-blur-glass border-[var(--glass-border)] hover:bg-primary hover:text-primary-foreground transition-colors duration-300 animate-fade-in-up"
           style={{ animationDelay: "0.4s" }}
         >
           <span>Enter Portfolio</span>

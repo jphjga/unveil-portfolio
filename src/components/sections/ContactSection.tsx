@@ -68,9 +68,13 @@ const ContactSection = () => {
     <section 
       ref={ref}
       id="contact" 
-      className={`min-h-screen flex items-center justify-center px-6 py-20 transition-all duration-1000 ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+      className={`min-h-screen flex items-center justify-center px-6 py-20 transition-opacity duration-700 ease-out ${
+        isVisible ? "opacity-100" : "opacity-0"
       }`}
+      style={{
+        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+        transition: 'opacity 0.7s ease-out, transform 0.7s ease-out'
+      }}
     >
       <div className="max-w-4xl w-full text-center">
         <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
