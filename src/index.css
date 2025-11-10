@@ -59,27 +59,4 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
     font-family: 'Inter', sans-serif;
   }
-
-  /* Performance optimizations */
-  .animate-fade-in-up,
-  .animate-fade-in,
-  .animate-scale-in,
-  .animate-float {
-    will-change: transform, opacity;
-  }
-
-  /* Reduce backdrop blur for better performance */
-  .backdrop-blur-glass {
-    backdrop-filter: blur(8px);
-  }
-
-  /* Disable all animations when toggled off */
-  .no-animations *,
-  .no-animations *::before,
-  .no-animations *::after {
-    animation-duration: 0s !important;
-    animation-delay: 0s !important;
-    transition-duration: 0s !important;
-    transition-delay: 0s !important;
-  }
 }

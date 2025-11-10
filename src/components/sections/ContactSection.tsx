@@ -68,13 +68,7 @@ const ContactSection = () => {
     <section 
       ref={ref}
       id="contact" 
-      className={`min-h-screen flex items-center justify-center px-6 py-20 transition-opacity duration-700 ease-out ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}
-      style={{
-        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-        transition: 'opacity 0.7s ease-out, transform 0.7s ease-out'
-      }}
+      className="min-h-screen flex items-center justify-center px-6 py-20"
     >
       <div className="max-w-4xl w-full text-center">
         <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
@@ -88,7 +82,7 @@ const ContactSection = () => {
           {contactInfo.email && (
             <a
               href={`mailto:${contactInfo.email}`}
-              className="w-16 h-16 rounded-full bg-card/50 backdrop-blur-glass border border-[var(--glass-border)] flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-500 hover:scale-110"
+              className="w-16 h-16 rounded-full bg-card/50 border border-[var(--glass-border)] flex items-center justify-center"
             >
               <Mail className="w-6 h-6" />
             </a>
@@ -98,7 +92,7 @@ const ContactSection = () => {
               href={contactInfo.github_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-16 h-16 rounded-full bg-card/50 backdrop-blur-glass border border-[var(--glass-border)] flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-500 hover:scale-110"
+              className="w-16 h-16 rounded-full bg-card/50 border border-[var(--glass-border)] flex items-center justify-center"
             >
               <Github className="w-6 h-6" />
             </a>
@@ -108,7 +102,7 @@ const ContactSection = () => {
               href={contactInfo.linkedin_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-16 h-16 rounded-full bg-card/50 backdrop-blur-glass border border-[var(--glass-border)] flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-500 hover:scale-110"
+              className="w-16 h-16 rounded-full bg-card/50 border border-[var(--glass-border)] flex items-center justify-center"
             >
               <Linkedin className="w-6 h-6" />
             </a>
@@ -118,14 +112,14 @@ const ContactSection = () => {
               href={contactInfo.twitter_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-16 h-16 rounded-full bg-card/50 backdrop-blur-glass border border-[var(--glass-border)] flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-500 hover:scale-110"
+              className="w-16 h-16 rounded-full bg-card/50 border border-[var(--glass-border)] flex items-center justify-center"
             >
               <Twitter className="w-6 h-6" />
             </a>
           )}
         </div>
 
-        <div className="bg-card/50 backdrop-blur-glass border border-[var(--glass-border)] p-8 rounded-2xl max-w-2xl mx-auto">
+        <div className="bg-card/50 border border-[var(--glass-border)] p-8 rounded-2xl max-w-2xl mx-auto">
           <h3 className="text-2xl font-bold mb-6">Send me a message</h3>
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
@@ -155,7 +149,7 @@ const ContactSection = () => {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-gradient-primary hover:opacity-90 transition-opacity"
+              className="w-full bg-gradient-primary"
             >
               {isSubmitting ? "Sending..." : "Send Message"}
             </Button>

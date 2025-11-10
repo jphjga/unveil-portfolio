@@ -7,7 +7,6 @@ import AboutSection from "@/components/sections/AboutSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import SkillsSection from "@/components/sections/SkillsSection";
 import ContactSection from "@/components/sections/ContactSection";
-import AnimationToggle from "@/components/AnimationToggle";
 import portfolioBg from "@/assets/portfolio-bg.jpg";
 
 const Index = () => {
@@ -70,11 +69,7 @@ const Index = () => {
 
       {/* Welcome Screen */}
       {showWelcome && (
-        <div
-          className={`fixed inset-0 z-50 transition-transform duration-1000 ${
-            isRevealing ? "translate-y-full" : "translate-y-0"
-          }`}
-        >
+        <div className="fixed inset-0 z-50">
           <WelcomeScreen onEnter={handleEnter} />
         </div>
       )}
@@ -83,7 +78,6 @@ const Index = () => {
       {!showWelcome && (
         <>
           <CircularNav activeSection={activeSection} onNavigate={handleNavigate} />
-          <AnimationToggle />
           
           <div className="relative z-10">
             <HeroSection />

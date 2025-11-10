@@ -34,13 +34,7 @@ const AboutSection = () => {
     <section 
       ref={ref}
       id="about" 
-      className={`min-h-screen flex items-center justify-center px-6 py-20 transition-opacity duration-700 ease-out ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}
-      style={{
-        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-        transition: 'opacity 0.7s ease-out, transform 0.7s ease-out'
-      }}
+      className="min-h-screen flex items-center justify-center px-6 py-20"
     >
       <div className="max-w-4xl">
         <h2 className="text-4xl md:text-6xl font-bold mb-12 bg-gradient-primary bg-clip-text text-transparent">

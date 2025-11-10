@@ -31,13 +31,7 @@ const SkillsSection = () => {
     <section 
       ref={ref}
       id="skills" 
-      className={`min-h-screen flex items-center justify-center px-6 py-20 transition-opacity duration-700 ease-out ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}
-      style={{
-        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-        transition: 'opacity 0.7s ease-out, transform 0.7s ease-out'
-      }}
+      className="min-h-screen flex items-center justify-center px-6 py-20"
     >
       <div className="max-w-6xl w-full">
         <h2 className="text-4xl md:text-6xl font-bold mb-12 bg-gradient-primary bg-clip-text text-transparent">
@@ -47,7 +41,7 @@ const SkillsSection = () => {
           {skills.map((skillGroup, index) => (
             <div
               key={index}
-              className="bg-card/50 backdrop-blur-glass border border-[var(--glass-border)] p-6 rounded-lg hover:bg-card/80 transition-colors duration-300"
+              className="bg-card/50 border border-[var(--glass-border)] p-6 rounded-lg"
             >
               <h3 className="text-2xl font-bold mb-4 text-primary">
                 {skillGroup.category}
@@ -56,7 +50,7 @@ const SkillsSection = () => {
                 {skillGroup.items.map((skill, i) => (
                   <span
                     key={i}
-                    className="px-4 py-2 rounded-full bg-gradient-secondary border border-primary/20 text-foreground hover:bg-gradient-primary hover:text-primary-foreground transition-all duration-300 cursor-default"
+                    className="px-4 py-2 rounded-full bg-gradient-secondary border border-primary/20 text-foreground cursor-default"
                   >
                     {skill}
                   </span>
