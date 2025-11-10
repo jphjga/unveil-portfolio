@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import WelcomeScreen from "@/components/WelcomeScreen";
 import CircularNav from "@/components/CircularNav";
+import LazySection from "@/components/LazySection";
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
@@ -86,10 +87,18 @@ const Index = () => {
           
           <div className="relative z-10">
             <HeroSection />
-            <AboutSection />
-            <ProjectsSection />
-            <SkillsSection />
-            <ContactSection />
+            <LazySection>
+              <AboutSection />
+            </LazySection>
+            <LazySection>
+              <ProjectsSection />
+            </LazySection>
+            <LazySection>
+              <SkillsSection />
+            </LazySection>
+            <LazySection>
+              <ContactSection />
+            </LazySection>
           </div>
 
           {/* Footer */}
