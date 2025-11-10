@@ -45,8 +45,8 @@ All colors MUST be HSL.
     --glass-bg: rgba(10, 14, 39, 0.6);
     --glass-border: rgba(99, 102, 241, 0.2);
     
-    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 }
 

@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
-import ImageUpload from "./ImageUpload";
 
 export const AboutContentManager = () => {
   const [loading, setLoading] = useState(false);
@@ -138,11 +137,12 @@ export const AboutContentManager = () => {
         </div>
 
         <div className="space-y-2">
-          <Label>Profile Image</Label>
-          <ImageUpload
-            currentImageUrl={profileImageUrl}
-            onImageUploaded={setProfileImageUrl}
-            folder="profile"
+          <Label htmlFor="profileImg">Profile Image URL</Label>
+          <Input
+            id="profileImg"
+            value={profileImageUrl}
+            onChange={(e) => setProfileImageUrl(e.target.value)}
+            placeholder="URL to your profile image"
           />
         </div>
 

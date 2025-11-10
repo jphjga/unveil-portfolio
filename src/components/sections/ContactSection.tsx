@@ -5,10 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const ContactSection = () => {
-  const { ref, isVisible } = useScrollAnimation();
   const { toast } = useToast();
   const [contactInfo, setContactInfo] = useState({
     email: "y0njengajoseph+portfolio@gmail.com",
@@ -65,11 +63,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section 
-      ref={ref}
-      id="contact" 
-      className="min-h-screen flex items-center justify-center px-6 py-20"
-    >
+    <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20">
       <div className="max-w-4xl w-full text-center">
         <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
           Let's Connect
@@ -82,7 +76,7 @@ const ContactSection = () => {
           {contactInfo.email && (
             <a
               href={`mailto:${contactInfo.email}`}
-              className="w-16 h-16 rounded-full bg-card/50 border border-[var(--glass-border)] flex items-center justify-center"
+              className="w-16 h-16 rounded-full bg-card/50 backdrop-blur-glass border border-[var(--glass-border)] flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-500 hover:scale-110"
             >
               <Mail className="w-6 h-6" />
             </a>
@@ -92,7 +86,7 @@ const ContactSection = () => {
               href={contactInfo.github_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-16 h-16 rounded-full bg-card/50 border border-[var(--glass-border)] flex items-center justify-center"
+              className="w-16 h-16 rounded-full bg-card/50 backdrop-blur-glass border border-[var(--glass-border)] flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-500 hover:scale-110"
             >
               <Github className="w-6 h-6" />
             </a>
@@ -102,7 +96,7 @@ const ContactSection = () => {
               href={contactInfo.linkedin_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-16 h-16 rounded-full bg-card/50 border border-[var(--glass-border)] flex items-center justify-center"
+              className="w-16 h-16 rounded-full bg-card/50 backdrop-blur-glass border border-[var(--glass-border)] flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-500 hover:scale-110"
             >
               <Linkedin className="w-6 h-6" />
             </a>
@@ -112,14 +106,14 @@ const ContactSection = () => {
               href={contactInfo.twitter_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-16 h-16 rounded-full bg-card/50 border border-[var(--glass-border)] flex items-center justify-center"
+              className="w-16 h-16 rounded-full bg-card/50 backdrop-blur-glass border border-[var(--glass-border)] flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-500 hover:scale-110"
             >
               <Twitter className="w-6 h-6" />
             </a>
           )}
         </div>
 
-        <div className="bg-card/50 border border-[var(--glass-border)] p-8 rounded-2xl max-w-2xl mx-auto">
+        <div className="bg-card/50 backdrop-blur-glass border border-[var(--glass-border)] p-8 rounded-2xl max-w-2xl mx-auto">
           <h3 className="text-2xl font-bold mb-6">Send me a message</h3>
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
@@ -149,7 +143,7 @@ const ContactSection = () => {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-gradient-primary"
+              className="w-full bg-gradient-primary hover:opacity-90 transition-opacity"
             >
               {isSubmitting ? "Sending..." : "Send Message"}
             </Button>

@@ -3,7 +3,6 @@ import { ExternalLink, Github } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 interface Project {
   id: string;
@@ -16,7 +15,6 @@ interface Project {
 }
 
 const ProjectsSection = () => {
-  const { ref, isVisible } = useScrollAnimation();
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
@@ -34,13 +32,9 @@ const ProjectsSection = () => {
   }, []);
 
   return (
-    <section 
-      ref={ref}
-      id="projects" 
-      className="min-h-screen flex items-center justify-center px-6 py-20"
-    >
+    <section id="projects" className="min-h-screen flex items-center justify-center px-6 py-20">
       <div className="max-w-7xl w-full">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
             Featured Projects
           </h2>
@@ -53,7 +47,8 @@ const ProjectsSection = () => {
           {projects.map((project, index) => (
             <Card
               key={index}
-              className="group bg-card/50 border-[var(--glass-border)] overflow-hidden"
+              className="group bg-card/50 backdrop-blur-glass border-[var(--glass-border)] overflow-hidden hover:bg-card/80 transition-all duration-500 hover:scale-105 hover:shadow-elegant"
+              style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Project Image */}
               <div className="relative aspect-video bg-gradient-secondary overflow-hidden">
@@ -61,14 +56,14 @@ const ProjectsSection = () => {
                   <img
                     src={project.image_url}
                     alt={`Screenshot of ${project.title}`}
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-muted-foreground">
                     No image
                   </div>
                 )}
-                <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-3">
+                <div className="absolute inset-0 bg-background/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-3">
                   {project.link && (
                     <Button
                       size="sm"
@@ -100,7 +95,7 @@ const ProjectsSection = () => {
 
               {/* Project Content */}
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-3">
+                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
                   {project.title}
                 </h3>
                 <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
@@ -112,7 +107,7 @@ const ProjectsSection = () => {
                   {project.tech_stack.map((tech, i) => (
                     <span
                       key={i}
-                      className="text-xs px-3 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20"
+                      className="text-xs px-3 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors"
                     >
                       {tech}
                     </span>

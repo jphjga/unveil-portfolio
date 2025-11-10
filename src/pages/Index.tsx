@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import WelcomeScreen from "@/components/WelcomeScreen";
 import CircularNav from "@/components/CircularNav";
-import LazySection from "@/components/LazySection";
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
@@ -69,7 +68,11 @@ const Index = () => {
 
       {/* Welcome Screen */}
       {showWelcome && (
-        <div className="fixed inset-0 z-50">
+        <div
+          className={`fixed inset-0 z-50 transition-transform duration-1000 ${
+            isRevealing ? "translate-y-full" : "translate-y-0"
+          }`}
+        >
           <WelcomeScreen onEnter={handleEnter} />
         </div>
       )}
@@ -81,18 +84,10 @@ const Index = () => {
           
           <div className="relative z-10">
             <HeroSection />
-            <LazySection>
-              <AboutSection />
-            </LazySection>
-            <LazySection>
-              <ProjectsSection />
-            </LazySection>
-            <LazySection>
-              <SkillsSection />
-            </LazySection>
-            <LazySection>
-              <ContactSection />
-            </LazySection>
+            <AboutSection />
+            <ProjectsSection />
+            <SkillsSection />
+            <ContactSection />
           </div>
 
           {/* Footer */}

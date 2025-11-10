@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const HeroSection = () => {
-  const { ref, isVisible } = useScrollAnimation();
   const [content, setContent] = useState({
     title: "Building Digital Experiences",
     subtitle: "Transforming ideas into elegant, functional solutions through code and design",
@@ -25,12 +23,8 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section 
-      ref={ref}
-      id="hero" 
-      className="min-h-screen flex items-center justify-center px-6"
-    >
-      <div className="max-w-4xl text-center">
+    <section id="hero" className="min-h-screen flex items-center justify-center px-6">
+      <div className="max-w-4xl text-center animate-fade-in-up">
         <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-accent bg-clip-text text-transparent">
           {content.title}
         </h2>
@@ -41,7 +35,7 @@ const HeroSection = () => {
           {content.techTags.map((tag, index) => (
             <div
               key={index}
-              className="px-6 py-3 rounded-full bg-card/50 border border-[var(--glass-border)]"
+              className="px-6 py-3 rounded-full bg-card/50 backdrop-blur-glass border border-[var(--glass-border)]"
             >
               <span className="text-foreground">{tag}</span>
             </div>
