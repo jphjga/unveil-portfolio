@@ -72,4 +72,14 @@ All colors MUST be HSL.
   .backdrop-blur-glass {
     backdrop-filter: blur(8px);
   }
+
+  /* Disable all animations when toggled off */
+  .no-animations *,
+  .no-animations *::before,
+  .no-animations *::after {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
 }
