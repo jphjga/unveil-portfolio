@@ -187,7 +187,33 @@ export const ProjectsManager = () => {
     }
   };
 
-  const removeScreenshot = (url: string) => {
+  const removeScreenshot = async (url: string) => {
+    try {
+      // Extract file path from public URL
+      const urlParts = url.split('/storage/v1/object/public/portfolio-images/');
+      if (urlParts.length === 2) {
+        const filePath = urlParts[1];
+        
+        // Delete from storage
+        const { error } = await supabase.storage
+          .from('portfolio-images')
+          .remove([filePath]);
+        
+        if (error) throw error;
+        
+        toast({
+          title: "Image deleted",
+          description: "Screenshot removed from storage",
+        });
+      }
+    } catch (error: any) {
+      toast({
+        title: "Error deleting image",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+    
     setScreenshots(screenshots.filter((s) => s !== url));
   };
 
