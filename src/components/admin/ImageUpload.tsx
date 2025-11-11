@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { Upload, X, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
@@ -14,6 +14,7 @@ const ImageUpload = ({ currentImageUrl, onImageUploaded, folder }: ImageUploadPr
   const { toast } = useToast();
   const [uploading, setUploading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState(currentImageUrl);
+  const inputId = useId();
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -88,7 +89,7 @@ const ImageUpload = ({ currentImageUrl, onImageUploaded, folder }: ImageUploadPr
     <div className="space-y-4">
       <div className="flex items-center gap-4">
         <label
-          htmlFor={`file-upload-${folder}`}
+          htmlFor={inputId}
           className="cursor-pointer"
         >
           <div className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg hover:bg-accent transition-colors">
@@ -105,7 +106,7 @@ const ImageUpload = ({ currentImageUrl, onImageUploaded, folder }: ImageUploadPr
             )}
           </div>
           <input
-            id={`file-upload-${folder}`}
+            id={inputId}
             type="file"
             accept="image/*"
             onChange={handleFileChange}
