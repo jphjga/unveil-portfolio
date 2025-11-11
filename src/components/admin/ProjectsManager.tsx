@@ -191,6 +191,28 @@ export const ProjectsManager = () => {
     setScreenshots(screenshots.filter((s) => s !== url));
   };
 
+  const handleDragStart = (e: React.DragEvent, index: number) => {
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", index.toString());
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+  };
+
+  const handleDrop = (e: React.DragEvent, dropIndex: number) => {
+    e.preventDefault();
+    const dragIndex = parseInt(e.dataTransfer.getData("text/plain"));
+    
+    if (dragIndex === dropIndex) return;
+
+    const newScreenshots = [...screenshots];
+    const [draggedItem] = newScreenshots.splice(dragIndex, 1);
+    newScreenshots.splice(dropIndex, 0, draggedItem);
+    setScreenshots(newScreenshots);
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -251,22 +273,35 @@ export const ProjectsManager = () => {
                     folder="projects"
                   />
                   {screenshots.length > 0 && (
-                    <div className="grid grid-cols-3 gap-2 mt-2">
-                      {screenshots.map((url, index) => (
-                        <div key={index} className="relative group">
-                          <img
-                            src={url}
-                            alt={`Screenshot ${index + 1}`}
-                            className="w-full h-20 object-cover rounded border"
-                          />
-                          <button
-                            onClick={() => removeScreenshot(url)}
-                            className="absolute top-1 right-1 bg-destructive text-destructive-foreground rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                    <div className="space-y-2 mt-2">
+                      <p className="text-xs text-muted-foreground">Drag to reorder screenshots</p>
+                      <div className="grid grid-cols-3 gap-2">
+                        {screenshots.map((url, index) => (
+                          <div
+                            key={url}
+                            draggable
+                            onDragStart={(e) => handleDragStart(e, index)}
+                            onDragOver={handleDragOver}
+                            onDrop={(e) => handleDrop(e, index)}
+                            className="relative group cursor-move"
                           >
-                            <X className="h-3 w-3" />
-                          </button>
-                        </div>
-                      ))}
+                            <img
+                              src={url}
+                              alt={`Screenshot ${index + 1}`}
+                              className="w-full h-20 object-cover rounded border"
+                            />
+                            <button
+                              onClick={() => removeScreenshot(url)}
+                              className="absolute top-1 right-1 bg-destructive text-destructive-foreground rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                            >
+                              <X className="h-3 w-3" />
+                            </button>
+                            <div className="absolute bottom-1 left-1 bg-background/80 text-foreground text-xs px-1.5 py-0.5 rounded">
+                              {index + 1}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
