@@ -80,7 +80,30 @@ const ImageUpload = ({ currentImageUrl, onImageUploaded, folder }: ImageUploadPr
     }
   };
 
-  const removeImage = () => {
+  const removeImage = async () => {
+    if (previewUrl) {
+      try {
+        // Extract file path from public URL
+        const urlParts = previewUrl.split('/storage/v1/object/public/portfolio-images/');
+        if (urlParts.length === 2) {
+          const filePath = urlParts[1];
+          
+          // Delete from storage
+          const { error } = await supabase.storage
+            .from('portfolio-images')
+            .remove([filePath]);
+          
+          if (error) throw error;
+        }
+      } catch (error: any) {
+        toast({
+          title: "Error deleting image",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
+    }
+    
     setPreviewUrl(undefined);
     onImageUploaded("");
   };
