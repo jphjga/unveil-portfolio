@@ -19,6 +19,7 @@ interface Project {
   link: string | null;
   github_link: string | null;
   tech_stack: string[];
+  screenshots: string[];
   is_published: boolean;
   display_order: number;
 }
@@ -37,6 +38,7 @@ export const ProjectsManager = () => {
   const [link, setLink] = useState("");
   const [githubLink, setGithubLink] = useState("");
   const [techStack, setTechStack] = useState<string[]>([]);
+  const [screenshots, setScreenshots] = useState<string[]>([]);
   const [newTech, setNewTech] = useState("");
   const [isPublished, setIsPublished] = useState(true);
   const [displayOrder, setDisplayOrder] = useState(0);
@@ -73,6 +75,7 @@ export const ProjectsManager = () => {
     setLink("");
     setGithubLink("");
     setTechStack([]);
+    setScreenshots([]);
     setNewTech("");
     setIsPublished(true);
     setDisplayOrder(0);
@@ -87,6 +90,7 @@ export const ProjectsManager = () => {
     setLink(project.link || "");
     setGithubLink(project.github_link || "");
     setTechStack(project.tech_stack || []);
+    setScreenshots(project.screenshots || []);
     setIsPublished(project.is_published);
     setDisplayOrder(project.display_order);
     setDialogOpen(true);
@@ -110,6 +114,7 @@ export const ProjectsManager = () => {
         link: link || null,
         github_link: githubLink || null,
         tech_stack: techStack,
+        screenshots: screenshots,
         is_published: isPublished,
         display_order: displayOrder,
       };
@@ -176,6 +181,16 @@ export const ProjectsManager = () => {
     setTechStack(techStack.filter((t) => t !== tech));
   };
 
+  const addScreenshot = (url: string) => {
+    if (url && !screenshots.includes(url)) {
+      setScreenshots([...screenshots, url]);
+    }
+  };
+
+  const removeScreenshot = (url: string) => {
+    setScreenshots(screenshots.filter((s) => s !== url));
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -227,6 +242,33 @@ export const ProjectsManager = () => {
                     onImageUploaded={setImageUrl}
                     folder="projects"
                   />
+                </div>
+
+                <div className="space-y-2">
+                  <Label>Additional Screenshots</Label>
+                  <ImageUpload
+                    onImageUploaded={addScreenshot}
+                    folder="projects"
+                  />
+                  {screenshots.length > 0 && (
+                    <div className="grid grid-cols-3 gap-2 mt-2">
+                      {screenshots.map((url, index) => (
+                        <div key={index} className="relative group">
+                          <img
+                            src={url}
+                            alt={`Screenshot ${index + 1}`}
+                            className="w-full h-20 object-cover rounded border"
+                          />
+                          <button
+                            onClick={() => removeScreenshot(url)}
+                            className="absolute top-1 right-1 bg-destructive text-destructive-foreground rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X className="h-3 w-3" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div className="space-y-2">
