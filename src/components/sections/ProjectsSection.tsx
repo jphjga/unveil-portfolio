@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { ExternalLink, Github } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import ProjectModal from "@/components/ProjectModal";
 
 interface Project {
   id: string;
@@ -13,11 +13,19 @@ interface Project {
   link?: string;
   github_link?: string;
   image_url?: string;
+  screenshots?: string[];
 }
 
 const ProjectsSection = () => {
   const { ref, isVisible } = useScrollAnimation();
   const [projects, setProjects] = useState<Project[]>([]);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleViewProject = (project: Project) => {
+    setSelectedProject(project);
+    setModalOpen(true);
+  };
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -72,32 +80,14 @@ const ProjectsSection = () => {
                   </div>
                 )}
                 <div className="absolute inset-0 bg-background/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-3">
-                  {project.link && (
-                    <Button
-                      size="sm"
-                      variant="secondary"
-                      className="gap-2"
-                      asChild
-                    >
-                      <a href={project.link} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="w-4 h-4" />
-                        View
-                      </a>
-                    </Button>
-                  )}
-                  {project.github_link && (
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="gap-2"
-                      asChild
-                    >
-                      <a href={project.github_link} target="_blank" rel="noopener noreferrer">
-                        <Github className="w-4 h-4" />
-                        Code
-                      </a>
-                    </Button>
-                  )}
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    className="gap-2"
+                    onClick={() => handleViewProject(project)}
+                  >
+                    View Details
+                  </Button>
                 </div>
               </div>
 
@@ -125,6 +115,12 @@ const ProjectsSection = () => {
             </Card>
           ))}
         </div>
+
+        <ProjectModal
+          project={selectedProject}
+          isOpen={modalOpen}
+          onClose={() => setModalOpen(false)}
+        />
       </div>
     </section>
   );

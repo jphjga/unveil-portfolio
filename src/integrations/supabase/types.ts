@@ -135,6 +135,7 @@ export type Database = {
           image_url: string | null
           is_published: boolean
           link: string | null
+          screenshots: string[] | null
           tech_stack: string[]
           title: string
           updated_at: string
@@ -148,6 +149,7 @@ export type Database = {
           image_url?: string | null
           is_published?: boolean
           link?: string | null
+          screenshots?: string[] | null
           tech_stack?: string[]
           title: string
           updated_at?: string
@@ -161,6 +163,7 @@ export type Database = {
           image_url?: string | null
           is_published?: boolean
           link?: string | null
+          screenshots?: string[] | null
           tech_stack?: string[]
           title?: string
           updated_at?: string
