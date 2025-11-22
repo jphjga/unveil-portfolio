@@ -140,7 +140,7 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
     {/* Fullscreen Image Viewer */}
     {isFullscreen && (
       <div 
-        className="fixed inset-0 z-[100] bg-background/95 flex items-center justify-center cursor-pointer"
+        className="fixed inset-0 z-[200] bg-background flex items-center justify-center cursor-pointer"
         onClick={() => setIsFullscreen(false)}
       >
         <img
